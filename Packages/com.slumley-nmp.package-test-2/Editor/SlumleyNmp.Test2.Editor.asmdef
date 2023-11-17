@@ -1,0 +1,16 @@
+{
+    "name": "SlumleyNmp.Test2.Editor",
+    "rootNamespace": "SlumleyNmp.Test2",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

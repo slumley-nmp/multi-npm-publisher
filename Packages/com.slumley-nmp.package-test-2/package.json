@@ -1,0 +1,15 @@
+{
+  "name": "com.slumley-nmp.package-test-2",
+  "version": "0.1.0",
+  "displayName": "Package test 2",
+  "unity": "2022.3",
+  "unityRelease": "10f1",
+  "description": "Test package 2",
+  "dependencies": {},
+  "author": {
+    "name": "S. Lumley NMP",
+    "email": "slumley-nmp@mail.com",
+    "url": "https://www.slumley-nmp.com"
+  },
+  "samples": null
+}

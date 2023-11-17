@@ -14,4 +14,18 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Print File Contents
-      run: cat Packages/manifest.json
+      run: |
+        echo "Printing each json"
+        for folder in "Packages"/*; do
+          if [ -d $"folder" ]; then
+            file_to_print="$folder/package.json"
+        
+            if [ -e "$file_to_print" ]; then
+                echo "Contents of $file_to_print:"
+                cat "$file_to_print"
+                echo "------------------------"
+            else
+                echo "File package.json not found in $folder"
+            fi
+          fi
+        done
