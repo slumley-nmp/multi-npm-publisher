@@ -1,0 +1,17 @@
+name: Print File Contents
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  print-file-contents:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Print File Contents
+      run: cat Packages/manifest.json
