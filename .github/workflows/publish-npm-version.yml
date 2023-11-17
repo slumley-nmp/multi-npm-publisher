@@ -17,7 +17,7 @@ jobs:
       run: |
         echo "Printing each json"
         for folder in "Packages"/*; do
-          if [ -d $"folder" ]; then
+          if [ -d "$folder" ]; then
             file_to_print="$folder/package.json"
         
             if [ -e "$file_to_print" ]; then
