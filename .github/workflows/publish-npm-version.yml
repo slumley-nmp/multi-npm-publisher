@@ -53,7 +53,7 @@ jobs:
           fi
         done
     - name: Publish packages to NPM
-      if: 'false' == 'true'
+      if: 'false'
       run: |
         for folder in "Packages"/*; do
           if [ -d "$folder" ]; then
