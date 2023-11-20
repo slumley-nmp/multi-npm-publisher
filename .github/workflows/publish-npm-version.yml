@@ -45,12 +45,13 @@ jobs:
                 package_name=$(grep -oPm 1 '"name": "\K[^"]+' $file_to_print)
                 package_version=$(grep -oPm 1 '"version": "\K[^"]+' $file_to_print)
                 echo " - Checking if $package_name@$package_version exists"
-                npm show "$package_name@$package_version" version &> /dev/null
+                result=$(npm show "$package_name@$package_version" version &> /dev/null)
                 if [ $? -eq 0 ]; then
                   echo "Package $package_name@$package_version exists on the remote registry."
                 else
                   echo "Package $package_name@$package_version does not exist on the remote registry."
                 fi
+                echo "Result $result"
             else
                 echo "File package.json not found in $folder"
             fi
