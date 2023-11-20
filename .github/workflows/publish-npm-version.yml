@@ -23,6 +23,7 @@ jobs:
         registry-url: https://npm.pkg.github.com/
         always-auth: true
     - name: Check a single existing package
+      if: 'false'
       run: |
         echo "Checking a single package"
         package_name="com.stillfront.sound"
