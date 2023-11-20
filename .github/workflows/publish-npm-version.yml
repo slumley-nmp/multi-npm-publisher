@@ -25,7 +25,7 @@ jobs:
         package_name="com.stillfront.sound"
         package_version="2.0.3"
         echo " - Checking if $package_name@$package_version exists"
-        npm show "$package_name@$package_version" version
+        npm show --registry="https://npm.pkg.github.com/@Stillfront" "$package_name@$package_version" version
         if [ $? -eq 0 ]; then
           echo "Package $package_name@$package_version exists on the remote registry."
         else
