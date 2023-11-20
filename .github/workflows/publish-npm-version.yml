@@ -11,21 +11,64 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Print File Contents
+      uses: actions/checkout@v3
+    - name: Setup Npm
+      uses: actions/setup-node@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        node-version: 12
+        registry-url: https://npm.pkg.github.com/
+        always-auth: true
+    - name: Check a single existing package
       run: |
-        echo "Printing each json"
+        echo "Checking a single package"
+        package_name="com.stratkit.asset-importer"
+        package_version="0.1.0"
+        echo " - Checking if $package_name@$package_version exists"
+        npm show "$package_name@$package_version" version
+        if [ $? -eq 0 ]; then
+          echo "Package $package_name@$package_version exists on the remote registry."
+        else
+          echo "Package $package_name@$package_version does not exist on the remote registry."
+        fi
+    - name: Print Package that would publish
+      run: |
+        echo "Checking each package"
         for folder in "Packages"/*; do
           if [ -d "$folder" ]; then
             file_to_print="$folder/package.json"
-        
             if [ -e "$file_to_print" ]; then
-                echo "Contents of $file_to_print:"
-                cat "$file_to_print"
-                echo "------------------------"
+                package_name=$(grep -oPm 1 '"name": "\K[^"]+' package.json)
+                package_version=$(grep -oPm 1 '"version": "\K[^"]+' package.json)
+                echo " - Checking if $package_name@$package_version exists"
+                npm show "$package_name@$package_version" version &> /dev/null
+                if [ $? -eq 0 ]; then
+                  echo "Package $package_name@$package_version exists on the remote registry."
+                else
+                  echo "Package $package_name@$package_version does not exist on the remote registry."
+                fi
             else
                 echo "File package.json not found in $folder"
             fi
           fi
         done
+    - name: Publish packages to NPM
+      if: 'false' == 'true'
+      run: |
+        for folder in "Packages"/*; do
+          if [ -d "$folder" ]; then
+            file_to_publish="$folder/package.json"
+        
+            if [ -e "$file_to_publish" ]; then
+                echo "Publishing $file_to_publish"
+                cd "$folder" || exit 1
+
+                # npm publish
+
+                cd - || exit 2
+            else
+                echo "File package.json not found in $folder"
+            fi
+          fi
+        done
+        echo "Finished publishing all packages"
