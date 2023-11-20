@@ -8,6 +8,9 @@ on:
 jobs:
   print-file-contents:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
 
     steps:
     - name: Checkout Repository
