@@ -42,8 +42,8 @@ jobs:
           if [ -d "$folder" ]; then
             file_to_print="$folder/package.json"
             if [ -e "$file_to_print" ]; then
-                package_name=$(grep -oPm 1 '"name": "\K[^"]+' package.json)
-                package_version=$(grep -oPm 1 '"version": "\K[^"]+' package.json)
+                package_name=$(grep -oPm 1 '"name": "\K[^"]+' $file_to_print)
+                package_version=$(grep -oPm 1 '"version": "\K[^"]+' $file_to_print)
                 echo " - Checking if $package_name@$package_version exists"
                 npm show "$package_name@$package_version" version &> /dev/null
                 if [ $? -eq 0 ]; then
