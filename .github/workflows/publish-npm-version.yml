@@ -22,8 +22,8 @@ jobs:
     - name: Check a single existing package
       run: |
         echo "Checking a single package"
-        package_name="com.stratkit.asset-importer"
-        package_version="0.1.0"
+        package_name="com.stillfront.sound"
+        package_version="2.0.3"
         echo " - Checking if $package_name@$package_version exists"
         npm show "$package_name@$package_version" version
         if [ $? -eq 0 ]; then
