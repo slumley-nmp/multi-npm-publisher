@@ -81,11 +81,11 @@ jobs:
         
                 # Deactivate exit on error
                 set +e
-                npm show "$package_name@$package_version" version &> /dev/null
+                npm show "$package_name@$package_version" version
                 exit_code=$?
                 # Reactivate exit on error
                 set -e
-        
+                echo " - - "
                 if [ $exit_code -eq 0 ]; then
                   echo "Package $package_name@$package_version already exists."
                 else
