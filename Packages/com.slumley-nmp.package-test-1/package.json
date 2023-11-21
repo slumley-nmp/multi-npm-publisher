@@ -6,6 +6,9 @@
   "unityRelease": "10f1",
   "description": "Test package 1",
   "dependencies": {},
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@slumley-nmp"
+  },
   "author": {
     "name": "S. Lumley NMP",
     "email": "slumley-nmp@mail.com",
