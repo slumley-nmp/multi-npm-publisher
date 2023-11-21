@@ -37,35 +37,6 @@ jobs:
         else
           echo "Package $package_name@$package_version does not exist on the remote registry."
         fi
-    - name: Print Package that would publish
-      if: 'false'
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: |
-        echo "Checking each package"
-        for folder in "Packages"/*; do
-          if [ -d "$folder" ]; then
-            file_to_print="$folder/package.json"
-            if [ -e "$file_to_print" ]; then
-                package_name=$(grep -oPm 1 '"name": "\K[^"]+' $file_to_print)
-                package_version=$(grep -oPm 1 '"version": "\K[^"]+' $file_to_print)
-                echo " - Checking if $package_name@$package_version exists"
-                # Deactivate exit on error
-                set +e
-                npm show "$package_name@$package_version" version &> /dev/null
-                exit_code=$?
-                # Reactivate exit on error
-                set -e
-                if [ $exit_code -eq 0 ]; then
-                  echo "Package $package_name@$package_version exists on the remote registry."
-                else
-                  echo "Package $package_name@$package_version does not exist on the remote registry ($exit_code)."
-                fi
-            else
-                echo "File package.json not found in $folder"
-            fi
-          fi
-        done
     - name: Publish packages to NPM
       if: 'true'
       env:
@@ -78,10 +49,11 @@ jobs:
             if [ -e "$file_to_publish" ]; then
                 package_name=$(grep -oPm 1 '"name": "\K[^"]+' $file_to_publish)
                 package_version=$(grep -oPm 1 '"version": "\K[^"]+' $file_to_publish)
+                package_registry=$(grep -oPm 1 '"registry": "\K[^"]+' $file_to_publish)
         
                 # Deactivate exit on error
                 set +e
-                npm show "$package_name@$package_version" version
+                npm show --registry="$package_registry" "$package_name@$package_version" version
                 exit_code=$?
                 # Reactivate exit on error
                 set -e
