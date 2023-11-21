@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: read
+      packages: write
 
     steps:
     - name: Checkout Repository
@@ -36,6 +36,7 @@ jobs:
           echo "Package $package_name@$package_version does not exist on the remote registry."
         fi
     - name: Print Package that would publish
+      if: 'false'
       run: |
         echo "Checking each package"
         for folder in "Packages"/*; do
@@ -62,7 +63,7 @@ jobs:
           fi
         done
     - name: Publish packages to NPM
-      if: 'false'
+      if: 'true'
       run: |
         for folder in "Packages"/*; do
           if [ -d "$folder" ]; then
