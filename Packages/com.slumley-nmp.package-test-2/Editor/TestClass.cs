@@ -2,6 +2,6 @@
 {
     public sealed class TestClass
     {
-        public int Version = 1;
+        public int Version = 2;
     }
 }

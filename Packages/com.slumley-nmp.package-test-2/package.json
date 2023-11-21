@@ -1,11 +1,10 @@
 {
   "name": "com.slumley-nmp.package-test-2",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Package test 2",
   "unity": "2022.3",
   "unityRelease": "10f1",
   "description": "Test package 2",
-  "dependencies": {},
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@slumley-nmp"
   },
