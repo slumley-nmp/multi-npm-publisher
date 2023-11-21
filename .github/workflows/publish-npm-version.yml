@@ -24,6 +24,8 @@ jobs:
         always-auth: true
     - name: Check a single existing package
       if: 'false'
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         echo "Checking a single package"
         package_name="com.stillfront.sound"
@@ -37,6 +39,8 @@ jobs:
         fi
     - name: Print Package that would publish
       if: 'false'
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         echo "Checking each package"
         for folder in "Packages"/*; do
@@ -64,6 +68,8 @@ jobs:
         done
     - name: Publish packages to NPM
       if: 'true'
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         for folder in "Packages"/*; do
           if [ -d "$folder" ]; then
